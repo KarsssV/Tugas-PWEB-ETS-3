@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Contact Form</h1>
+        <form id="contact-form">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <span id="name-error" class="error hidden">Name is required.</span>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span id="email-error" class="error hidden">Please enter a valid email address.</span>
+            </div>
+            <div>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <span id="phone-error" class="error hidden">Please enter a valid phone number.</span>
+            </div>
+            <div>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <span id="message-error" class="error hidden">Message is required.</span>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Reset error messages
+    document.querySelectorAll('.error').forEach(function(error) {
+        error.classList.add('hidden');
+    });
+
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const message = document.getElementById('message').value;
+
+    // Validate form fields
+    let isValid = true;
+
+    if (name === '') {
+        document.getElementById('name-error').classList.remove('hidden');
+        isValid = false;
+    }
+
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        document.getElementById('email-error').classList.remove('hidden');
+        isValid = false;
+    }
+
+    if (!phone.match(/^[0-9]+$/)) {
+        document.getElementById('phone-error').classList.remove('hidden');
+        isValid = false;
+    }
+
+    if (message === '') {
+        document.getElementById('message-error').classList.remove('hidden');
+        isValid = false;
+    }
+
+    // If form is valid, submit the data
+    if (isValid) {
+        // Perform form submission logic here
+        console.log('Form submitted successfully!');
+        console.log('Name:', name);
+        console.log('Email:', email);
+        console.log('Phone:', phone);
+        console.log('Message:', message);
+    }
+});
+    </script>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #e7f3ff;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Ensures full height of viewport */
+        margin: 0;
+    }
+
+    .form-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin: 60px 0; /* Space above and below */
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+        margin: 10px 0; /* Added margin for spacing */
+    }
+
+    label {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .error {
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>
